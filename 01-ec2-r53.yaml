@@ -3,12 +3,12 @@
   connection: local
   become: yes
   vars:
-    AMI_ID="ami-0220d79f3f480ecf5"
-    SG_ID="sg-0cec9364e954bfbdd"
-    INSTANCE_TYPE="t3.micro"
-    DOMAIN="prudhvii.fun"
+    AMI_ID: "ami-0220d79f3f480ecf5"
+    SG_ID: "sg-0cec9364e954bfbdd"
+    INSTANCE_TYPE: "t3.micro"
+    DOMAIN: "prudhvii.fun"
     instances:
-      - mongodb
+    - mongodb
 
   tasks:
   - name: create aws ec2
