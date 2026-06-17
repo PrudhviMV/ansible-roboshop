@@ -4,11 +4,23 @@
 
   tasks:
   - name: disable redis
-    ansible.builtin.package:
-      name: redis
-      state: absent
+    ansible.builtin.command: dnf module disable redis -y
 
   - name: enable redis 7
+    ansible.builtin.command: dnf module enable redis:7 -y
+
+  - name: install redis
     ansible.builtin.package:
-      name: redis:7
+      name: redis
       state: present
+
+  - name: allow connections and enable protected modee
+    ansible.builtin.replace:
+      path: /etc/redis/redis.conf
+      regexp: 'protected-mode'
+      replace: 'protected-mode no'
+
+  - name: enable and start redis
+    ansible.builtin.service:
+      state: present
+      enabled: true      
