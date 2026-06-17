@@ -1,0 +1,28 @@
+- name: create ec2 and update route 53
+  hosts: localhost
+  connection: local
+  become: yes
+  vars:
+    AMI_ID="ami-0220d79f3f480ecf5"
+    SG_ID="sg-0cec9364e954bfbdd"
+    INSTANCE_TYPE="t3.micro"
+    DOMAIN="prudhvii.fun"
+  instances:
+    - mongodb
+
+  tasks:
+  - name: create aws ec2
+    amazon.aws.ec2_instance:
+      state: present
+      name: "{{ item }}"
+      instance_type: "{{ INSTANCE_TYPE }}"
+      security_group: "{{ SG_ID }}"
+      image_id: "{{ AMI_ID }}"
+      tags:
+        Environment: test
+    loop: "{{ instances }}"
+    register: ec2_output
+
+  - name: print ec2_output
+    ansible.builtin.debug:
+      msg: "{{ ec2_output }}"
