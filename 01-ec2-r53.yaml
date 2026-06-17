@@ -7,8 +7,8 @@
     SG_ID="sg-0cec9364e954bfbdd"
     INSTANCE_TYPE="t3.micro"
     DOMAIN="prudhvii.fun"
-  instances:
-    - mongodb
+    instances:
+      - mongodb
 
   tasks:
   - name: create aws ec2
