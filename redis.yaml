@@ -22,5 +22,5 @@
 
   - name: enable and start redis
     ansible.builtin.service:
-      state: present
+      state: started
       enabled: true      
