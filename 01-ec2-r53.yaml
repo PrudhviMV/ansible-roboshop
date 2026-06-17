@@ -1,7 +1,7 @@
 - name: create ec2 and update route 53
   hosts: localhost
   connection: local
-  become: yes
+  #become: yes
   vars:
     AMI_ID: "ami-0220d79f3f480ecf5"
     SG_ID: "sg-0cec9364e954bfbdd"
