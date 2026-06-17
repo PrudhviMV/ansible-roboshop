@@ -26,7 +26,8 @@
   - name: print ec2_output
     ansible.builtin.debug:
       msg: "{{ ec2_output }}"
+    register: ec2_output
 
   - name: print public_ip
     ansible.builtin.debug:
-      msg: "{{ results.instances.public_ip}}"
+      msg: "{{ ec2_output.results.instances.public_ip}}"
