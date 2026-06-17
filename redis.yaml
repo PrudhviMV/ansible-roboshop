@@ -1,0 +1,14 @@
+- name: setup redis server
+  hosts: redis
+  become: yes
+
+  tasks:
+  - name: disable redis
+    ansible.builtin.package:
+      name: redis
+      state: absent
+
+  - name: enable redis 7
+    ansible.builtin.package:
+      name: redis:7
+      state: present

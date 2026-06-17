@@ -9,7 +9,7 @@
     DOMAIN: "prudhvii.fun"
     ZONE_ID: "Z00068622FEPCRKDV786J"
     instances:
-    - mongodb
+    - redis
 
   tasks:
   - name: create aws ec2
