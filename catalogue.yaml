@@ -1,0 +1,69 @@
+- name: setup catalogue
+  hosts: catalogue
+  become: yes
+
+  tasks:
+  - name: disable nodejs
+    ansible.builtin.command: dnf module disable nodejs -y
+
+  - name: enable nodejs
+    ansible.builtin.command: dnf module enable nodejs:20 -y
+
+  - name: install nodejs
+    ansible.builtin.package:
+      name: nodejs
+      state: present
+
+  - name: add roboshop user
+    ansible.builtin.user:
+      name: roboshop
+      shell: /sbin/nologin
+      home: /app
+
+  - name: Recursively remove directory
+    ansible.builtin.file:
+      path: /app
+      state: absent    
+
+  - name: create app directory
+    ansible.builtin.file:
+      path: /app
+      state: directory
+
+  - name: Download app code
+    url: https://roboshop-artifacts.s3.amazonaws.com/catalogue-v3.zip 
+    dest: /tmp/catalogue.zip
+
+  - name: Unzip file on remote host
+    ansible.builtin.unarchive:
+      src: /tmp/catalogue.zip
+      dest: /app
+      remote_src: yes
+
+  - name: Install Node.js packages from package.json
+    community.general.npm:
+      path: /app
+
+  - name: copy catalogue config
+    ansible.builtin.copy:
+      src: catalogue.service
+      dest: /etc/systemd/system/catalogue.service
+
+  - name: copy mongo config
+    ansible.builtin.copy:
+      src: mongo.repo
+      dest: /etc/yum.repos.d/mongo.repo
+
+  - name: install mongodb
+    ansible.builtin.package: 
+      name: mongodb-mongosh
+      state: present
+
+  - name: start catalogue
+    ansible.builtin.service:
+      name: catalogue
+      state: started
+      enabled: yes
+
+  - name: load master data
+    ansible.builtin.shell: mongosh --host mongodb.prudhvii.fun </app/db/master-data.js
