@@ -21,8 +21,8 @@
 
   - name: add user and set password
     community.rabbitmq.rabbitmq_user:
-      user: joe
-      password: changeme
+      user: roboshop
+      password: roboshop123
       vhost: /
       configure_priv: .*
       read_priv: .*
