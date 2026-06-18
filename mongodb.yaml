@@ -1,5 +1,5 @@
 - name: setup mongodb
-  hosts: localhost
+  hosts: mongodb
   connection: local
   become: yes
 
