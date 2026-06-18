@@ -38,14 +38,13 @@
       remote_src: yes
 
   - name: install dependencies
-    ansible.builtin.command:
-      cmd: /opt/maven/bin/mvn clean package
-      args:
+    ansible.builtin.command: mvn clean package
+    args:
       chdir: /app
 
-  - name: move packages
-    ansible.builtin.command: mv target/shipping-1.0.jar shipping.jar 
-      args:
+  - name: move jar file
+    ansible.builtin.command: mv target/shipping-1.0.jar shipping.jar
+    args:
       chdir: /app
 
   - name: copy service to server
