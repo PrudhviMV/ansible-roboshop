@@ -7,6 +7,11 @@
     ansible.builtin.package:
       name: maven
       state: present
+
+  - name: Install PyMySQL using pip
+    ansible.builtin.pip:
+      name: pymysql
+      state: present
   
   - name: Add user
     ansible.builtin.user:
