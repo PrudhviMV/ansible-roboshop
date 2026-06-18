@@ -26,9 +26,14 @@
       path: /app
       state: directory
 
-  - name: fetch code from url
+  # - name: fetch code from url
+  #   ansible.builtin.get_url:
+  #     src: https://roboshop-artifacts.s3.amazonaws.com/shipping-v3.zip 
+  #     dest: /tmp/shipping.zip
+
+  - name: fetch code
     ansible.builtin.get_url:
-      src: https://roboshop-artifacts.s3.amazonaws.com/shipping-v3.zip 
+      url: https://roboshop-artifacts.s3.amazonaws.com/shipping-v3.zip
       dest: /tmp/shipping.zip
 
   - name: unzip code
