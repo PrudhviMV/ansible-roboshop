@@ -36,7 +36,7 @@
 
   - name: unzip code
     ansible.builtin.unarchive:
-      src: /tmp/payment-v3.zip
+      src: /tmp/payment.zip
       dest: /app
       remote_src: yes
 
