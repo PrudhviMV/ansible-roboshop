@@ -8,12 +8,12 @@
     INSTANCE_TYPE: "t3.micro"
     DOMAIN: "prudhvii.fun"
     ZONE_ID: "Z00068622FEPCRKDV786J"
-    instances:
-    - catalogue
-    - redis
-    - rabbitmq
-    - mongodb
-    - mysql
+    # instances:
+    # - catalogue
+    # - redis
+    # - rabbitmq
+    # - mongodb
+    # - mysql
 
   tasks:
   - name: create aws ec2
